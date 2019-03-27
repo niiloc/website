@@ -1,0 +1,14 @@
+certifi==2018.1.18
+chardet==3.0.4
+dj-database-url==0.5.0
+Django==2.0.3
+idna==2.6
+omdb==0.8.1
+pytz==2018.3
+requests==2.18.4
+tmdbsimple==2.1.0
+tmdbv3api==0.6.1
+gunicorn==19.6.0
+psycopg2==2.7.4
+urllib3==1.22
+whitenoise==3.3.1

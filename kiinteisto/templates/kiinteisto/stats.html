@@ -1,0 +1,114 @@
+<!DOCTYPE html> {% extends "base.html" %}
+
+<html>
+
+<head>
+  <style>
+    h1 {
+      margin-top: 10px;
+    }
+    #map {
+        margin: 0 auto 0 auto;
+        width: 600px;
+        height: 500px;
+      }
+    #floating-panel {
+
+      top: 10px;
+      left: 25%;
+      z-index: 5;
+      background-color: #fff;
+      padding: 5px;
+      border: 1px solid #999;
+      text-align: center;
+      font-family: 'Roboto','sans-serif';
+      line-height: 30px;
+      padding-left: 10px;
+    }
+
+    #submit {
+      width: 550px;
+      
+    }
+
+  </style>
+
+</head>
+
+<body>
+    
+  {% block content %}
+
+  
+  <div class="col-lg-12">
+    <style>
+      .form-signin {
+        max-width: 550px;
+        padding: 15px;
+        margin: 0 auto;
+      }
+    </style>
+
+    <div class="container text-center">
+      <br>
+      <td>Tällä sivulla voit saada tietoa kiinteistötunnuksen alueesta ja alueen tilastoista. <br><br>
+        
+        Voit kokeilla palvelua näillä: 686-401-7-29,
+          420-436-1-70 tai 167-24-91-9</td>
+      <form class="form-signin" id="login_form" method="post" action="/kiinteisto/stats/">
+
+        {% csrf_token %}
+
+
+        <br>
+        <input type="text" name="tunnus" class="form-control" placeholder="Kiinteistötunnus" value="" required
+          autofocus>
+        <br>
+        
+        <button id="get_data_button" class="btn btn-lg btn-primary btn-block" type="submit">Hae tiedot</button>
+      </form>
+    </div>
+<div align="center">
+    
+  <table>
+    {% for result in show %}
+    <tr><p>Tässä tietoja kiinteistötunnuksesta:</p></tr>
+    <tr>
+      
+      <tr id="request_address"><p>Kaupungin nimi: {{ result.city_name }} </p></tr>
+      <tr><p>Ruotsinkielinen nimi: {{ result.swe_name }}</p></tr>
+      <tr><p>Maakunnan nimi: {{ result.state }}</p></tr>
+      <tr><p>Kaupungissa olevat kiinteistöt: {{ result.amount_of_r_state }}</p></tr>
+
+    </tr>
+    {% endfor %}
+  </table>
+</div>
+
+
+  {% endblock %}
+  {% block extra_js %}
+  <!-- include BlockUI -->
+
+<script src="https://malsup.github.io/jquery.blockUI.js"></script>
+
+  <script>
+      // document ready -->
+        $( document ).ready(function() {
+            console.log( "document loaded" );
+
+            // invoke blockUI as needed -->
+        $('#get_data_button').click(function() {
+          $.blockUI({ message: '<div class="spinner-border"></div> <p>Loading, just a moment.</p>' });
+          console.log( "loader loaded" );
+    
+      });
+        });
+    
+    
+      </script>
+{% endblock extra_js %}
+
+
+</body>
+</html>

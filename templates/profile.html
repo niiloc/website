@@ -1,0 +1,142 @@
+<!-- templates/profile.html-->
+{% extends 'base.html' %}
+
+<!DOCTYPE html>
+<html>
+{% block content %}
+<head>
+    <script src="/static/jquery/dist/jquery.js"></script>
+    <script src="https://code.jquery.com/jquery-3.1.1.min.js"></script>
+    <script src="https://code.highcharts.com/highcharts.js"></script>
+    <script src="https://code.highcharts.com/modules/series-label.js"></script>
+    <script src="https://code.highcharts.com/modules/exporting.js"></script>
+    <script src="https://code.highcharts.com/modules/export-data.js"></script>
+    <script type="text/javascript" src="/static/bootstrap/dist/js/bootstrap.min.js"></script>
+    <link rel="stylesheet" href="/static/bootstrap/dist/css/bootstrap.min.css">
+    <link rel="stylesheet" href="/static/bootstrap/dist/css/bootstrap-theme.min.css">
+    
+    <style>
+    h1{
+      margin-top: 10px;
+    }
+    </style>
+
+
+
+</head>
+
+<body>
+
+<script>
+
+// $(function () { 
+//     var myChart = Highcharts.chart('container', {
+//         chart: {
+//             type: 'column'
+//         },
+//         title: {
+//             text: 'Fruit Consumption'
+//         },
+//         xAxis: {
+//             categories: {{categories}}
+//         },
+//         series: [{
+//           name: 'Under 4',
+//           data: {{ under_4 }},
+//           color: 'green'
+//       }, {
+//           name: 'Over 6',
+//           data: {{ more_6 }},
+//           color: 'red'
+//       }, {
+//           name: 'Average',
+//           data: {{ average }},
+//           color: 'red'
+//       }]
+//     });
+// });
+
+$(function () {
+
+Highcharts.chart('container', {
+    chart: {
+        type: 'scatter'
+    },
+    title: {
+        text: 'The ratings of your Seriescan picks'
+    },
+    subtitle: {
+        text: 'Source: The Moview Database'
+    },
+    xAxis: {
+        title: {
+            enabled: true,
+            text: 'Your series'
+        },
+        type: "category"
+    },
+
+    yAxis: {
+        title: {
+            text: 'Rating (0-10)'
+        }
+    },
+    plotOptions: {
+        line: {
+            dataLabels: {
+                enabled: true
+            },
+            enableMouseTracking: false
+        }
+    },
+    series: [{
+        name: 'ratings',
+        data: {% autoescape off %} {{ name_vote }} {% endautoescape %}
+    }]
+})
+});
+
+</script>
+
+<div id="container" style="width:100%; height:400px;"></div>
+
+<table class="table table-bordered table-hover table-striped tablesorter">
+              <thead>
+              <tr>
+                <th class="header"> Series name <i class="icon-sort"></i></th>
+                <th class="header"> Vote average <i class="icon-sort"></i></th>
+              	<th class="header"> Delete? <i class="icon-sort"></i></th>
+              </tr>
+          </thead>
+          <tbody>
+<h2>Your chosen series:</h2>
+{% for series in series_list %}
+	<tr>
+ 		<td>{{ series.series_name}}</td>
+ 		<td>{{ series.vote_average}}</td>
+ 		<td>
+ 			<form class="form-signin" method="post" action="/accounts/profile/">
+ 				{% csrf_token %}
+
+                <!-- <input type="submit" class="btn" value="{{ series.series_id }}" name="id"> -->
+                <button type="submit" class="btn btn-primary" name="foo" value="{{ series.series_id }}">Delete</button>
+            </form>
+        </td>
+ 	</tr>
+ {% endfor %}
+<div class="row">
+    <div class="col-sm-4">
+        <form class="form-signin" method="get" action="/accounts/profile/">
+            <input type="submit" class="btn btn-success" value="Pick random" name="picker">
+        </form>
+    </div>
+    <div class="col-sm-4">
+        <p> {{ random_series }} </p>
+    </div>
+</div>
+ </tbody>
+ </table>
+
+</body>
+{% endblock %}
+</html>

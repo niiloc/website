@@ -1,0 +1,47 @@
+<!-- templates/home.html-->
+{% extends 'base.html' %}
+
+{% block title %}Home{% endblock %}
+
+{% block content %}
+{% if user.is_authenticated %}
+  <div class="container-fluid">
+    <div class="d-flex flex-row"> 
+    <div class="p-2">Hi {{ user.username }}!</div>
+    <div class="ml-auto p-2">
+      <p>
+      <a href="{% url 'logout' %}">logout</a>
+      </p>
+    </div>
+  </div>
+</div>
+{% else %}
+<div class="container-fluid">
+  <div class="d-flex flex-row">
+  <p>You are not logged in</p>
+  <div class="ml-auto p-2">
+  <a href="{% url 'login' %}">login</a> |
+  <a href="{% url 'signup' %}">register</a>
+</div>
+</div>
+</div>
+{% endif %}
+
+<div class="container-fluid">
+
+
+
+<p class="frontpage" align="center">Welcome to the SeriesCan (Sarjapurkki in Finnish) web-app!
+  </p>
+ 
+  <p class="frontpage">
+  With the SeriesCan you can search for your favorite series, add them to your list
+  and pick one at random if you can't choose. The SeriesCan can!
+</p>
+
+<p class="frontpage">
+  You will also get stats of your favorite series: their ratings provided by TMDb.
+</p>
+</div>
+<img src="static/images/netflix.jpg" class="img-fluid" alt="watchingtv" />
+{% endblock %}

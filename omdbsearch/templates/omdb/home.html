@@ -1,0 +1,25 @@
+<!-- templates/home.html-->
+{% extends 'base.html' %}
+
+{% block title %}Sarjapurkki{% endblock %}
+
+{% block content %}
+
+<div class="container-fluid">
+
+
+
+<p class="frontpage" align="center">Welcome to the SeriesCan (Sarjapurkki in Finnish) web-app!
+  </p>
+ 
+  <p class="frontpage">
+  With the SeriesCan you can search for your favorite series, add them to your list
+  and pick one at random if you can't choose. The SeriesCan can!
+</p>
+
+<p class="frontpage">
+  You will also get stats of your favorite series: their ratings provided by TMDb.
+</p>
+</div>
+<img src="/app/static/images/netflix.jpg" class="img-fluid" alt="watchingtv" />
+{% endblock %}

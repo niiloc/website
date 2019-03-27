@@ -1,0 +1,13 @@
+/* p.frontpage {
+    padding-bottom: 0.2em;
+} */
+
+p.infotext {
+    background-color: #007bff;
+    font-size: 1em;
+    color: white;
+    text-align: center;
+    border-radius: 20px;
+    padding: 0.5em;
+    margin-top: 0.2em;
+}

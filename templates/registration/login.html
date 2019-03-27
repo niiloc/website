@@ -1,0 +1,39 @@
+<!-- templates/registration/login.html -->
+
+<!DOCTYPE html>
+<html>
+<head>
+    <script src="/static/jquery/dist/jquery.js"></script>
+    <script type="text/javascript" src="/static/bootstrap/dist/js/bootstrap.min.js"></script>
+    <link rel="stylesheet" href="/static/bootstrap/dist/css/bootstrap.min.css">
+    <link rel="stylesheet" href="/static/bootstrap/dist/css/bootstrap-theme.min.css">
+
+    <meta charset="utf-8">
+
+    <style type="text/css">
+    	h2{
+      		position: relative;
+      		left: 100px;
+      		margin-top: 10px;
+  		}
+
+    	form{
+    		position: relative;
+    		left: 30px;
+    	}
+    </style>
+
+</head>
+
+{% extends 'base.html' %}
+
+{% block title %}Login{% endblock %}
+
+{% block content %}
+<h2>Login</h2>
+<form method="post">
+  {% csrf_token %}
+  {{ form.as_p }}
+  <button type="submit" class="btn btn-primary">Login</button>
+</form>
+{% endblock %}

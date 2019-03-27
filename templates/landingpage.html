@@ -1,0 +1,56 @@
+<!-- templates/landingpage.html-->
+{% extends 'base.html' %}
+
+{% block title %}Home{% endblock %}
+
+{% block content %}
+{% if user.is_authenticated %}
+  <div class="container-fluid">
+    <div class="d-flex flex-row"> 
+    <div class="p-2">Hi {{ user.username }}!</div>
+    <div class="ml-auto p-2">
+      <p>
+      <a href="{% url 'logout' %}">logout</a>
+      </p>
+    </div>
+  </div>
+</div>
+{% else %}
+<div class="container-fluid">
+  <div class="d-flex flex-row">
+  <p>You are not logged in</p>
+  <div class="ml-auto p-2">
+  <a href="{% url 'login' %}">login</a> |
+  <a href="{% url 'signup' %}">register</a>
+</div>
+</div>
+<div class="container-fluid border">
+    <div class="d-flex justify-content-md-center" style="margin:10px">
+        Click on your chosen app! You can also navigate using the menu above.
+    </div>
+
+    <div class="d-flex justify-content-md-center" style="margin:10px">
+            <img src="https://images.unsplash.com/photo-1550557019-3436df3d1c67?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=500&q=60" class="rounded float-left" alt="tv">
+            <img src="https://images.unsplash.com/photo-1516156008625-3a9d6067fab5?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=500&q=60" class="rounded float-right" alt="house">
+    </div>
+
+    <div class="d-flex flex-row justify-content-around">
+        <a href="{% url 'search' %}" class="btn btn-primary " role="button">Sarjapurkki</a>
+        <a href="{% url 'lookup' %}" class="btn btn-primary btn-danger" role="button">Kiinteistöt</a>
+    </div>
+
+    <div class="d-flex flex-row justify-content-around">
+
+            <div class="p-2 w-100 border border-top-0 border-bottom-0 border-left-0">Sarjapurkki lets you add your favorite series into a "can".
+                You can see the averate ratings from TMDb. You can also pick one of your series
+                in random, if you can't decide which one to watch first!
+            </div>
+
+            <div class="p-2 w-100">Kiinteistöt lets you search with a real estate ID (kiinteistötunnus)
+                the address of that ID. You can also use the stats page to view some (beta).
+            </div>
+    </div>
+</div>
+</div>
+{% endif %}
+{% endblock %}
